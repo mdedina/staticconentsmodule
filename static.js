@@ -5,6 +5,12 @@ module.exports = function (request, response){
     response.write(message);
     response.end(request.url);
   }
+
+  if(request.url.substr(1,8) == "private/") {
+    errorResponse(request, response, "Not authorized:");
+    return;
+  }
+
   var fs = require('fs');
   var ext = request.url.substr(request.url.lastIndexOf('.') + 1);
         if (ext == "html" || ext == "css") {
